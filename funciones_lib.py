@@ -1,10 +1,75 @@
 #aca defino todas las funciones que voy a importar
-#importo json y las otras funciones que faltan
-from general import buscar_por_titulo, buscar_por_autor, buscar_por_editorial, buscar_por_año
+#importo json y el main
 import json
 import proyecto_libreria
 
 libreria = proyecto_libreria.obtenerDatos()
+
+# Function : Buscar x titulo
+def buscar_por_titulo():
+    try:
+        titulo = input("Ingrese el titulo del libro: ")
+        if titulo in libreria:
+            libro = libreria [titulo]
+            print("Informacion del libro:")
+            print("Titulo:", titulo)
+            print("Autor:", libro['autor'])
+            print("Editorial:", libro['editorial'])
+            print("Año de publicación:", libro['año'])
+            print("Stock:", libro['stock'])
+        else:
+            print("El libro no está en la librería.")
+    except:
+        print("Aún no se ingresaron libros")
+
+# Function : buscar x autor
+def buscar_por_autor():
+    autor = input("Ingrese el autor del libro: ")
+    libros_encontrados = []
+
+    for titulo, libro in libreria.items():
+        if libro['autor'] == autor:
+            libros_encontrados.append(titulo)
+
+    if libros_encontrados:
+        print("Libros encontrados por autor", autor + ":")
+        for titulo in libros_encontrados:
+            print(titulo)
+    else:
+        print("No se encontraron libros del autor", autor + ".")
+
+# Function : Buscar por editorial
+def buscar_por_editorial():
+
+    editorial = input("Ingrese el año de publicación: ")
+    libros_encontrados = []
+
+    for titulo, libro in libreria.items():   
+        if libro['editorial'] == editorial:
+            libros_encontrados.append(titulo)
+
+    if libros_encontrados:
+        print("Libros encontrados de la editorial", editorial + ":")
+        for titulo in libros_encontrados:
+            print(titulo)
+    else:
+        print("No books found from publisher", editorial + ".")
+
+# Function: buscar x año de public.
+def buscar_por_año():
+    año = int(input("Enter the publication year of the book: "))
+    libros_encontrados = []
+
+    for titulo, libro in libreria.items():
+        if libro['año'] == str(año):
+            libros_encontrados.append(titulo)
+
+    if libros_encontrados:
+        print("Libros publicados en el año", año, ":")
+        for titulo in libros_encontrados:
+            print(titulo)
+    else:
+        print("No se encontraron libros publicados en", año)
 
 # AGREGAR LIBRO
 def agregar_libro():
@@ -24,14 +89,6 @@ def agregar_libro():
     with open('libros.json', 'w') as file:
         json.dump(libreria, file, indent=2)
     print("Libro agregado exitosamente.")
-
-# Function to read data from a saved file (should be called in the corresponding book search function)
-def leer_datos():
-    try:
-        with open('libros.json', 'r') as archivo:
-            libreria = json.load(archivo)
-    except FileNotFoundError:
-        libreria = {}
 
 # ELIMINAR LIBRO DE DIC
 def eliminar_libro():
@@ -58,6 +115,13 @@ def buscar_libro():
     
     while True:
         opcion = int(input("Ingresa una opción: "))
+        print("OPCIONES DE BUSQUEDA:")
+        print("1. Buscar por titulo")
+        print("2. Buscar por autor")
+        print("3. Buscar por editorial")
+        print("4. Buscar por año de publicación")
+        print("5. Salir del menú")
+        opcion = input("Ingrese una opcion de busqueda: ")
 
         if opcion == 1:
             buscar_por_titulo()
@@ -72,29 +136,3 @@ def buscar_libro():
             break
         else:
             print("Opción invalida. Intente de nuevo.")
-
-# MENU PRINCIPAL
-def menu_principal():
-    print("*" * 20)
-    print("Gestión de Librería")
-    print("*" * 20)
-
-    libreria = proyecto_libreria.obtenerDatos()
-
-    while True:
-        print("""MAIN MENU: \n1. Agregar libro \n2. Eliminar Libro \n3. Buscar libro  \n4. Salir""")
-        opcion_principal = int(input("Ingrese su opción: "))
-
-        if opcion_principal == 1:
-            agregar_libro()
-        elif opcion_principal == 2:
-            eliminar_libro()
-        elif opcion_principal == 3:
-            buscar_libro()
-        elif opcion_principal == 4:
-            print("Saliendo del programa...")
-            break
-        else:
-            print("Ingrese una opción válida")
-
-menu_principal()
