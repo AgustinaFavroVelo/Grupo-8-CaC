@@ -4,8 +4,8 @@ import funciones_lib
 # FUNCION PARA OBTENER DATOS DESDE JSON
 def obtenerDatos():
     try:
-        with open("libros.json", "r") as file:
-            libreria = json.load(file)
+        with open("libros.json", "r") as archivo:
+            libreria = json.load(archivo)
             print (libreria)
     except FileNotFoundError:
         libreria = {}
