@@ -1,1 +1,16 @@
-
+[
+  {
+    "titulo": "emma",
+    "autor": "jane austen",
+    "editorial": "penguin",
+    "a\u00f1o": 1815,
+    "stock": 45
+  },
+  {
+    "titulo": "1984",
+    "autor": "george orwell",
+    "editorial": "debolsillo",
+    "a\u00f1o": 1949,
+    "stock": 47
+  }
+]
