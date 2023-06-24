@@ -53,7 +53,7 @@ def buscar_por_editorial():
         for titulo in libros_encontrados:
             print(titulo)
     else:
-        print("No books found from publisher", editorial + ".")
+        print("No se encontraron libros de la editorial", editorial + ".")
 
 # Function: buscar x año de public.
 def buscar_por_año():
